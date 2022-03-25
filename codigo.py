@@ -1,31 +1,61 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Mar 24 19:07:14 2022
+Created on Fri Mar 25 15:52:13 2022
 
-@author: emanu
+@author: Aluno
 """
-
-# def hoffman(lista):
-lista=[1,3,3,3,6,4,2,2,2,2,2,2,2,8,8,8,8]
-lista2=[]
-for elemento in lista:
-    lista2.append(lista.count(elemento))
-dic = {}
-for i,y in zip(lista, lista2):
-    dic[i] = y
+import numpy as np
+lista =[2,2,2,2,2,2,2,2,2,2,2,2]
+valores=[]
+ordenado = []
+dicionario = {}
+novo = {}
+codificado=[]
+texto=''
+numeros =[]
+lista_qualquercoisa = []
     
-lista3 = list(zip(dic.keys(),dic.values()))
-lista3.sort(key=lambda x: x[1])
-dic1 = dict((z, w) for (z, w) in lista3)
-print(dic1,'\n')
+for i in lista:
+    total = lista.count(i)
+    valores.append(total)
+for i,x in zip (lista,valores):
+    dicionario[i] = x
 
-maior = dic[max(dic1, key=dic1.get)]
+for item in sorted(dicionario, key = dicionario.get, reverse=True):
+    ordenado.append(item)
 
-for n, a in dic.items():
-    if a == maior: 
-        principal=n
-        print(principal)
+txt = "0"
+for i in ordenado:
+    novo[i] = txt
+    txt = "1"+txt
+    
+for j in lista:
+    codificado.append((novo[j]))
+
+for g in codificado:
+    texto+=g
+
+texto = list(texto)
+
+           
+while True:
+    verificar = len(texto)%8
+
+    if verificar == 0: 
+        break
+        
+    else:
+        texto.append('1')
+        
+for i in texto:
+    numeros.append(int(i))   
+colunas = int(len(texto)/8)
+array = np.array(numeros)
+array = array.reshape((colunas , 8))
+for i in array:
+    for j in i:
+        lista_qualquercoisa.append(j)
         
 
-
-
+lista_qualquercoisa = ''.join(lista_qualquercoisa) 
+print(lista_qualquercoisa)
